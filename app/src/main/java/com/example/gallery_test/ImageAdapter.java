@@ -62,7 +62,7 @@ public class ImageAdapter extends BaseAdapter {
             int imageID = cursor.getInt(columnIndex);
             //Set the content of the image based on the provider URI
             imageView.setImageURI(Uri.withAppendedPath(
-                    MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, "" + imageID));
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "" + imageID));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             //imageView.setPadding(5, 5, 5, 5);
             imageView.setLayoutParams(new GridView.LayoutParams(350, 350));
