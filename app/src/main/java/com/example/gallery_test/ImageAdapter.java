@@ -15,6 +15,9 @@ import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.ArrayList;
 
 public class ImageAdapter extends BaseAdapter {
@@ -22,19 +25,6 @@ public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     ArrayList<String> imageArray;
 
-
-    /**public int[] imageArray = {
-            R.drawable.bal, R.drawable.myszojelen, R.drawable.plakat,
-            R.drawable.pic1, R.drawable.pic2, R.drawable.pic3,
-            R.drawable.pic4, R.drawable.pic5, R.drawable.pic6,
-            R.drawable.pic7, R.drawable.pic8, R.drawable.pic9,
-            R.drawable.pic10, R.drawable.pic10, R.drawable.pic12,
-            R.drawable.bal, R.drawable.myszojelen, R.drawable.plakat,
-            R.drawable.pic1, R.drawable.pic2, R.drawable.pic3,
-            R.drawable.pic4, R.drawable.pic5, R.drawable.pic6,
-            R.drawable.pic7, R.drawable.pic8, R.drawable.pic9,
-            R.drawable.pic10, R.drawable.pic10, R.drawable.pic12};
-*/
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public ImageAdapter(Context mContext) {
         this.mContext = mContext;
@@ -58,10 +48,23 @@ public class ImageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView = new ImageView(mContext);
-        imageView.setImageResource(Integer.parseInt(imageArray.get(position)));
+        ImageView imageView;// = new ImageView(mContext);
+        /**imageView.setImageResource(imageArray.get(position));
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageView.setLayoutParams(new GridView.LayoutParams(340,350));
+        imageView.setLayoutParams(new GridView.LayoutParams(340,350));*/
+        if (convertView == null) {
+            imageView = new ImageView(mContext);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setLayoutParams(new GridView.LayoutParams(350, 350));
+
+        } else {
+            imageView = (ImageView) convertView;
+        }
+
+        Glide.with(mContext).load(imageArray.get(position))
+                .placeholder(R.drawable.ic_launcher_foreground).centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .into(imageView);
 
         return imageView;
     }
