@@ -9,6 +9,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
 
+import java.util.Objects;
+
 public class FullImageActivity extends Activity {
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
@@ -20,11 +22,11 @@ public class FullImageActivity extends Activity {
         Intent i = getIntent();
 
         //Select image id
-        int position = i.getExtras().getInt("id");
+        int position = Objects.requireNonNull(i.getExtras()).getInt("id");
         ImageAdapter imageAdapter = new ImageAdapter(this);
 
-        ImageView imageView = (ImageView) findViewById( R.id.full_image_view);
-        imageView.setImageResource(imageAdapter.imageArray[position]);
+        ImageView imageView = findViewById( R.id.full_image_view);
+        imageView.setImageResource(Integer.parseInt(imageAdapter.imageArray.get(position)));
     }
     
 }
