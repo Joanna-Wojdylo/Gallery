@@ -9,6 +9,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -43,13 +44,14 @@ public class MainActivity extends Activity {
         //On Click event for Single GridView Item
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
-            public void onItemClick (AdapterView<?> parent, View v, int position, long id){
-                //Send image id to FullImageActivity
-                Intent i = new Intent(getApplicationContext(), FullImageActivity.class);
-                //passing array index
-                i.putExtra("id", position);
-                startActivity(i);
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            String imagePath = parent.getAdapter().getItem(position).toString();
+            Intent intent = new Intent(MainActivity.this, FullImageActivity.class);
+            intent.putExtra("imagePath", imagePath);
+
+            startActivity(intent);
             }
+
         });
     }
 

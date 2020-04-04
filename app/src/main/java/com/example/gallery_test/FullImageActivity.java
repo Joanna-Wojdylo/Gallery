@@ -3,11 +3,15 @@ package com.example.gallery_test;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageView;
+import com.bumptech.glide.Glide;
 
 import androidx.annotation.RequiresApi;
+
+import com.bumptech.glide.Glide;
 
 import java.util.Objects;
 
@@ -18,15 +22,16 @@ public class FullImageActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.full_image);
 
-        //get indent data
-        Intent i = getIntent();
+        ImageView fullScreenImageView = findViewById(R.id.full_image_view);
 
-        //Select image id
-        int position = Objects.requireNonNull(i.getExtras()).getInt("id");
-        ImageAdapter imageAdapter = new ImageAdapter(this);
-
-        ImageView imageView = findViewById( R.id.full_image_view);
-        imageView.setImageResource(Integer.parseInt(imageAdapter.imageArray.get(position)));
+        Intent callingActivityIntent = getIntent();
+        if(callingActivityIntent != null){
+            String imagePath = callingActivityIntent.getStringExtra("imagePath");
+            Glide.with(this)
+                    .load(imagePath)
+                    .placeholder(R.drawable.ic_launcher_background).centerInside()
+                    .into(fullScreenImageView);
+        }
     }
     
 }
