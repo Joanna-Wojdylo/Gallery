@@ -19,11 +19,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ImageAdapter extends BaseAdapter {
 
     private Context mContext;
-    private ArrayList<String> imageArray;
+    public ArrayList<String> imageArray;
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public ImageAdapter(Context mContext) {
@@ -66,7 +67,6 @@ public class ImageAdapter extends BaseAdapter {
 
         return imageView;
     }
-
     @SuppressLint("Recycle")
     @RequiresApi(api = Build.VERSION_CODES.Q)
     private ArrayList<String> loadImagesFromDevice(Context activity){
@@ -95,8 +95,9 @@ public class ImageAdapter extends BaseAdapter {
             fullImagePath = cursor.getString(photoIndex);
             imageArray.add(fullImagePath);
         }
-            return imageArray;
+        return imageArray;
 
     }
+
 }
 
