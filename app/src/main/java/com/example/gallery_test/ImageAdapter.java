@@ -19,15 +19,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ImageAdapter extends BaseAdapter {
 
     private Context mContext;
-    public ArrayList<String> imageArray;
+    ArrayList<String> imageArray;
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
-    public ImageAdapter(Context mContext) {
+    ImageAdapter(Context mContext) {
         this.mContext = mContext;
         imageArray = loadImagesFromDevice(mContext);
     }
@@ -49,7 +48,7 @@ public class ImageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;// = new ImageView(mContext);
+        ImageView imageView;
 
         if (convertView == null) {
             imageView = new ImageView(mContext);
@@ -88,7 +87,6 @@ public class ImageAdapter extends BaseAdapter {
 
         assert cursor != null;
         photoIndex = cursor.getColumnIndexOrThrow(MediaColumns.DATA);
-        //folderIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
 
         int position = 0;
         while (cursor.moveToNext()){
